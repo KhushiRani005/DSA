@@ -1,2 +1,2 @@
 # DSA
-All the DSA programing problems in C++
+All the DSA programing problems.
