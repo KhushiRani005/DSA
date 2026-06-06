@@ -6,30 +6,22 @@ class Solution {
         int[][] dp = new int[n + 1][m + 1];
 
         for (int i = 0; i <= n; i++) {
-            Arrays.fill(dp[i], Integer.MIN_VALUE);
+            for (int j = 0; j <= m; j++) {
+                dp[i][j] = Integer.MIN_VALUE;
+            }
         }
 
         for (int i = n - 1; i >= 0; i--) {
             for (int j = m - 1; j >= 0; j--) {
-
                 int product = nums1[i] * nums2[j];
 
-                int takeBoth = product;
-
-                if (dp[i + 1][j + 1] != Integer.MIN_VALUE) {
-                    takeBoth = Math.max(
-                        takeBoth,
-                        product + dp[i + 1][j + 1]
-                    );
-                }
-
                 dp[i][j] = Math.max(
-                    takeBoth,
-                    Math.max(
-                        dp[i + 1][j],
-                        dp[i][j + 1]
-                    )
+                    product,
+                    product + Math.max(0, dp[i + 1][j + 1])
                 );
+
+                dp[i][j] = Math.max(dp[i][j], dp[i + 1][j]);
+                dp[i][j] = Math.max(dp[i][j], dp[i][j + 1]);
             }
         }
 
